@@ -100,11 +100,6 @@ object NewTemplateForm: TNewTemplateForm
           Row = 1
         end
         item
-          Column = 1
-          Control = edFsrarId
-          Row = 1
-        end
-        item
           Column = 0
           Control = Label3
           Row = 2
@@ -123,6 +118,11 @@ object NewTemplateForm: TNewTemplateForm
           Column = 1
           Control = btOpenXML
           Row = 3
+        end
+        item
+          Column = 1
+          Control = cbFsrarID
+          Row = 1
         end>
       RowCollection = <
         item
@@ -158,6 +158,7 @@ object NewTemplateForm: TNewTemplateForm
         Height = 24
         Anchors = [akRight]
         TabOrder = 0
+        ExplicitTop = 19
       end
       object Label2: TLabel
         Left = 95
@@ -168,14 +169,6 @@ object NewTemplateForm: TNewTemplateForm
         Caption = #1060#1057#1056#1040#1056' ID:'
         ExplicitLeft = 84
         ExplicitTop = 68
-      end
-      object edFsrarId: TEdit
-        Left = 176
-        Top = 78
-        Width = 137
-        Height = 24
-        Anchors = [akRight]
-        TabOrder = 1
       end
       object Label3: TLabel
         Left = 78
@@ -193,7 +186,7 @@ object NewTemplateForm: TNewTemplateForm
         Width = 137
         Height = 24
         Anchors = [akRight]
-        TabOrder = 2
+        TabOrder = 1
       end
       object Label4: TLabel
         Left = 78
@@ -212,16 +205,35 @@ object NewTemplateForm: TNewTemplateForm
         Height = 25
         Anchors = [akRight]
         Caption = #1054#1073#1079#1086#1088
-        TabOrder = 3
+        TabOrder = 2
         OnClick = btOpenXMLClick
+      end
+      object cbFsrarID: TComboBox
+        Left = 176
+        Top = 78
+        Width = 137
+        Height = 24
+        Anchors = [akRight]
+        TabOrder = 3
+        Items.Strings = (
+          '010060693049'
+          '020000559704'
+          '020000783752')
+        ExplicitTop = 79
       end
     end
     object Memo1: TMemo
       Left = 8
       Top = 9
-      Width = 121
-      Height = 71
+      Width = 57
+      Height = 48
       Anchors = []
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -13
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
       TabOrder = 2
       Visible = False
     end

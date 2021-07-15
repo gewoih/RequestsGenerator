@@ -9,7 +9,8 @@ uses
   uxRequestTemplate in 'uxRequestTemplate.pas',
   ufNewTemplateForm in 'ufNewTemplateForm.pas' {NewTemplateForm},
   ufNewRequestForm in 'ufNewRequestForm.pas' {NewRequestForm},
-  ufXMLEditorForm in 'ufXMLEditorForm.pas' {XMLEditorForm};
+  ufXMLEditorForm in 'ufXMLEditorForm.pas' {XMLEditorForm},
+  uxReply in 'uxReply.pas';
 
 {$R *.res}
 

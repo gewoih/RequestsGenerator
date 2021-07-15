@@ -13,6 +13,7 @@ type
     Button1: TButton;
     SynEdit1: TSynEdit;
     SynXMLSyn1: TSynXMLSyn;
+    procedure Button1Click(Sender: TObject);
   private
     { Private declarations }
   public
@@ -25,5 +26,10 @@ var
 implementation
 
 {$R *.dfm}
+
+procedure TXMLEditorForm.Button1Click(Sender: TObject);
+begin
+    ModalResult := mrOK;
+end;
 
 end.

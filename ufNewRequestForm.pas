@@ -19,6 +19,7 @@ type
     edComment: TEdit;
     procedure FormCreate(Sender: TObject);
     procedure btEditXMLClick(Sender: TObject);
+    procedure btSaveAndSendClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -35,7 +36,11 @@ implementation
 uses
 ufMainForm,
 uxRequestTemplate,
-ufXMLEditorForm;
+ufXMLEditorForm,
+uxRequest;
+
+var
+    xmlText:    AnsiString;
 
 procedure TNewRequestForm.btEditXMLClick(Sender: TObject);
 begin
@@ -43,11 +48,24 @@ begin
     begin
     	try
         	SynEdit1.Lines.Text := Templates.Items[MainForm.TemplatesTree.FocusedNode.Index].xmlText;
-        	ShowModal;
+        	if ShowModal = mrOK then
+            	xmlText := SynEdit1.Lines.Text
+            else
+            	xmlText := Templates.Items[MainForm.TemplatesTree.FocusedNode.Index].xmlText;
         finally
-        	Free;
+            Free;
         end;
     end;
+end;
+
+procedure TNewRequestForm.btSaveAndSendClick(Sender: TObject);
+begin
+	var newRequest := TRequest.Create(0, Templates.Items[MainForm.TemplatesTree.FocusedNode.Index].id, 0, xmlText, Self.edComment.Text, '', 'Новый');
+
+    newRequest.UploadAndSendRequest;
+	FreeAndNil(newRequest);
+
+    Templates.Items[MainForm.TemplatesTree.FocusedNode.Index].LoadRequests;
 end;
 
 procedure TNewRequestForm.FormCreate(Sender: TObject);

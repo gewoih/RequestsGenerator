@@ -178,6 +178,7 @@ object NewRequestForm: TNewRequestForm
       Align = alClient
       Caption = #1057#1086#1093#1088#1072#1085#1080#1090#1100' '#1080' '#1086#1090#1087#1088#1072#1074#1080#1090#1100
       TabOrder = 1
+      OnClick = btSaveAndSendClick
     end
   end
 end

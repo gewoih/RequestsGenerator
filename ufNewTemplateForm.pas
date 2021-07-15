@@ -14,13 +14,13 @@ type
     Label1: TLabel;
     edRequestName: TEdit;
     Label2: TLabel;
-    edFsrarId: TEdit;
     Label3: TLabel;
     edRequestType: TEdit;
     Label4: TLabel;
     btOpenXML: TButton;
     OpenDialog1: TOpenDialog;
     Memo1: TMemo;
+    cbFsrarID: TComboBox;
     procedure btCreateTemplateClick(Sender: TObject);
     procedure btOpenXMLClick(Sender: TObject);
   private
@@ -38,20 +38,19 @@ implementation
 
 uses
 uxSQL,
-uxRequestTemplate;
+uxRequestTemplate,
+ufMainForm,
+uxTemplate;
 
 procedure TNewTemplateForm.btCreateTemplateClick(Sender: TObject);
 begin
 	var x: integer;
 
-	if (TryStrToInt(edFsrarId.Text, x) and TryStrToInt(edRequestType.Text, x)
+	if ((cbFsrarID.Text <> '') and TryStrToInt(edRequestType.Text, x)
     	and (edRequestName.Text <> '') and (Memo1.Text <> '')) then
     begin
-        fcon.Execute('insert into RequestsGenerator..Templates values(' +
-            QuotedStr(edRequestName.Text) + ',' +
-            edFsrarId.Text + ',' +
-            edRequestType.Text + ',' +
-            QuotedStr(Memo1.Text) + ')');
+        var newTemplate := TTemplate.Create(0, cbFsrarId.Text, StrToInt(edRequestType.Text), edRequestName.Text, Memo1.Text);
+        newTemplate.UploadTemplate;
 
         ShowMessage('Тип запроса ' + QuotedStr(edRequestName.Text) + ' успешно добавлен.');
 

@@ -11,6 +11,7 @@ object XMLEditorForm: TXMLEditorForm
   Font.Name = 'Tahoma'
   Font.Style = []
   OldCreateOrder = False
+  Position = poMainFormCenter
   PixelsPerInch = 96
   TextHeight = 13
   object GridPanel1: TGridPanel
@@ -54,6 +55,7 @@ object XMLEditorForm: TXMLEditorForm
       Align = alClient
       Caption = #1057#1086#1093#1088#1072#1085#1080#1090#1100
       TabOrder = 0
+      OnClick = Button1Click
     end
     object SynEdit1: TSynEdit
       Left = 1

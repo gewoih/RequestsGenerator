@@ -10,10 +10,8 @@ type
 	public
         Items:   array of TTemplate;
 
-        constructor Create;
         procedure LoadTemplates;
         procedure AddTemplate(R: OleVariant);
-        procedure Clear;
     end;
 
 var
@@ -26,16 +24,6 @@ ufMainForm,
 uxSQL,
 uxADO;
 
-constructor TRequestTemplate.Create;
-begin
-    Self.LoadTemplates;
-end;
-
-procedure TRequestTemplate.Clear;
-begin
-    SetLength(Items, 0);
-end;
-
 procedure TRequestTemplate.LoadTemplates;
 var
 	R:	OleVariant;
@@ -44,7 +32,9 @@ begin
 	try
         MainForm.TemplatesTree.BeginUpdate;
         MainForm.TemplatesTree.Clear;
-        Self.Clear;
+        MainForm.RequestsTree.Clear;
+        MainForm.RepliesTree.Clear;
+        SetLength(Self.Items, 0);
 
         R := fcon.execute('select * from RequestsGenerator..Templates');
 
@@ -55,8 +45,8 @@ begin
 
             MainForm.TemplatesTree.AddChild(nil, pointer(K));
 
-            R.MoveNext;
             Inc(K);
+            R.MoveNext;
         end;
     finally
         MainForm.TemplatesTree.EndUpdate;
