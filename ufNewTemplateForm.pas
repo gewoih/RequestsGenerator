@@ -7,6 +7,12 @@ uses
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.ExtCtrls;
 
 type
+    TRequestType = record
+        id:		integer;
+        name:   AnsiString;
+    end;
+
+type
   TNewTemplateForm = class(TForm)
     GridPanel1: TGridPanel;
     btCreateTemplate: TButton;
@@ -15,16 +21,17 @@ type
     edRequestName: TEdit;
     Label2: TLabel;
     Label3: TLabel;
-    edRequestType: TEdit;
     Label4: TLabel;
     btOpenXML: TButton;
     OpenDialog1: TOpenDialog;
     Memo1: TMemo;
     cbFsrarID: TComboBox;
+    cbTypes: TComboBox;
     procedure btCreateTemplateClick(Sender: TObject);
     procedure btOpenXMLClick(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
   private
-    { Private declarations }
+    RequestTypes:   array of TRequestType;
   public
     { Public declarations }
   end;
@@ -40,16 +47,17 @@ uses
 uxSQL,
 uxRequestTemplate,
 ufMainForm,
-uxTemplate;
+uxTemplate,
+uxADO;
 
 procedure TNewTemplateForm.btCreateTemplateClick(Sender: TObject);
 begin
 	var x: integer;
 
-	if ((cbFsrarID.Text <> '') and TryStrToInt(edRequestType.Text, x)
+	if ((cbFsrarID.Text <> '') and (cbTypes.Text <> '')
     	and (edRequestName.Text <> '') and (Memo1.Text <> '')) then
     begin
-        var newTemplate := TTemplate.Create(0, cbFsrarId.Text, StrToInt(edRequestType.Text), edRequestName.Text, Memo1.Text);
+        var newTemplate := TTemplate.Create(0, cbFsrarId.Text, Self.RequestTypes[cbTypes.ItemIndex].id, edRequestName.Text, Memo1.Text);
         newTemplate.UploadTemplate;
 
         ShowMessage('Тип запроса ' + QuotedStr(edRequestName.Text) + ' успешно добавлен.');
@@ -67,6 +75,27 @@ begin
         Memo1.Lines.LoadFromFile(OpenDialog1.FileName)
     else
         ShowMessage('Не удалось открыть файл.');
+end;
+
+procedure TNewTemplateForm.FormCreate(Sender: TObject);
+var
+	R:	OleVariant;
+    K:  integer;
+begin
+    R := fcon.Execute('select id, name from Egais..Command order by name');
+    K := 0;
+    while not R.EOF do
+    begin
+        SetLength(Self.RequestTypes, K+1);
+
+        Self.RequestTypes[K].id := AsInt(R, 'id');
+        Self.RequestTypes[K].name := AsStr(R, 'name');
+
+        cbTypes.Items.Add(Self.RequestTypes[K].name);
+
+        Inc(K);
+        R.MoveNext;
+    end;
 end;
 
 end.

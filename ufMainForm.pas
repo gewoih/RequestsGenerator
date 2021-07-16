@@ -22,6 +22,9 @@ type
     SynXMLSyn1: TSynXMLSyn;
     miDeleteTemplate: TMenuItem;
     N2: TMenuItem;
+    miSendRequest: TMenuItem;
+    N1: TMenuItem;
+    miDeleteRequest: TMenuItem;
     procedure FormCreate(Sender: TObject);
     procedure TemplatesTreeGetText(Sender: TBaseVirtualTree;
       Node: PVirtualNode; Column: TColumnIndex; TextType: TVSTTextType;
@@ -48,6 +51,8 @@ type
     procedure RepliesTreeFocusChanged(Sender: TBaseVirtualTree;
       Node: PVirtualNode; Column: TColumnIndex);
     procedure miDeleteTemplateClick(Sender: TObject);
+    procedure miSendRequestClick(Sender: TObject);
+    procedure miDeleteRequestClick(Sender: TObject);
   private
 	{ Private declarations }
   public
@@ -104,6 +109,32 @@ begin
             Templates.LoadTemplates;
 
             ShowMessage('Шаблон успешно удален.');
+        end;
+    end;
+end;
+
+procedure TMainForm.miSendRequestClick(Sender: TObject);
+begin
+    if (Assigned(RequestsTree.FocusedNode)) and (Templates.Items[TemplatesTree.FocusedNode.Index].RequestsHistory[RequestsTree.FocusedNode.Index].status = 'Новый') then
+    begin
+    	Templates.Items[TemplatesTree.FocusedNode.Index].RequestsHistory[RequestsTree.FocusedNode.Index].SendToEgais;
+
+        ShowMessage('Запрос успешно отправлен в ЕГАИС.');
+
+        Templates.Items[TemplatesTree.FocusedNode.Index].LoadRequests;
+    end;
+end;
+
+procedure TMainForm.miDeleteRequestClick(Sender: TObject);
+begin
+	if Assigned(RequestsTree.FocusedNode) then
+    begin
+        if MessageDlg('Вы уверены что хотите удалить этот запрос?', mtError, mbYesNo, 0) = mrYes then
+        begin
+        	Templates.Items[TemplatesTree.FocusedNode.Index].RequestsHistory[RequestsTree.FocusedNode.Index].DeleteFromBase;
+            Templates.Items[TemplatesTree.FocusedNode.Index].LoadRequests;
+
+            ShowMessage('Запрос успешно удален.');
         end;
     end;
 end;

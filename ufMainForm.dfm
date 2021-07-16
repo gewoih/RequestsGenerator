@@ -93,10 +93,10 @@ object MainForm: TMainForm
           Value = 40.000000000000000000
         end
         item
-          Value = 30.000000000000000000
+          Value = 15.000000000000000000
         end
         item
-          Value = 30.000000000000000000
+          Value = 45.000000000000000000
         end>
       TabOrder = 0
       object RequestsTree: TVirtualStringTree
@@ -121,10 +121,10 @@ object MainForm: TMainForm
         Colors.SelectionRectangleBorderColor = 15385233
         Colors.SelectionTextColor = clBlack
         Colors.TreeLineColor = 9471874
-        Colors.UnfocusedColor = 9695224
+        Colors.UnfocusedColor = 9693596
         Colors.UnfocusedSelectionColor = 15385233
         Colors.UnfocusedSelectionBorderColor = 15385233
-        Colors.HeaderColor = 9695224
+        Colors.HeaderColor = 9693596
         DefaultNodeHeight = 25
         Header.AutoSizeIndex = 3
         Header.DefaultHeight = 25
@@ -193,7 +193,7 @@ object MainForm: TMainForm
         Left = 0
         Top = 255
         Width = 769
-        Height = 191
+        Height = 95
         Align = alClient
         BevelOuter = bvNone
         Colors.BorderColor = 15987699
@@ -210,10 +210,10 @@ object MainForm: TMainForm
         Colors.SelectionRectangleBorderColor = 15385233
         Colors.SelectionTextColor = clBlack
         Colors.TreeLineColor = 9471874
-        Colors.UnfocusedColor = 9695224
+        Colors.UnfocusedColor = 9693596
         Colors.UnfocusedSelectionColor = 15385233
         Colors.UnfocusedSelectionBorderColor = 15385233
-        Colors.HeaderColor = 9695224
+        Colors.HeaderColor = 9693596
         DefaultNodeHeight = 25
         Header.AutoSizeIndex = 3
         Header.DefaultHeight = 25
@@ -230,6 +230,7 @@ object MainForm: TMainForm
         OnGetText = RepliesTreeGetText
         Touch.InteractiveGestures = [igPan, igPressAndTap]
         Touch.InteractiveGestureOptions = [igoPanSingleFingerHorizontal, igoPanSingleFingerVertical, igoPanInertia, igoPanGutter, igoParentPassthrough]
+        ExplicitHeight = 191
         Columns = <
           item
             CaptionAlignment = taCenter
@@ -270,9 +271,9 @@ object MainForm: TMainForm
       end
       object SynEdit1: TSynEdit
         Left = 0
-        Top = 446
+        Top = 350
         Width = 769
-        Height = 191
+        Height = 287
         Align = alClient
         Font.Charset = RUSSIAN_CHARSET
         Font.Color = clWindowText
@@ -288,6 +289,8 @@ object MainForm: TMainForm
         Highlighter = SynXMLSyn1
         ReadOnly = True
         FontSmoothing = fsmNone
+        ExplicitTop = 446
+        ExplicitHeight = 191
       end
     end
     object TemplatesTree: TVirtualStringTree
@@ -312,10 +315,10 @@ object MainForm: TMainForm
       Colors.SelectionRectangleBorderColor = 15385233
       Colors.SelectionTextColor = clBlack
       Colors.TreeLineColor = 9471874
-      Colors.UnfocusedColor = 9695420
+      Colors.UnfocusedColor = 9693792
       Colors.UnfocusedSelectionColor = 15385233
       Colors.UnfocusedSelectionBorderColor = 15385233
-      Colors.HeaderColor = 9695420
+      Colors.HeaderColor = 9693792
       DefaultNodeHeight = 25
       Header.AutoSizeIndex = 2
       Header.DefaultHeight = 25
@@ -384,6 +387,17 @@ object MainForm: TMainForm
     object miCreateRequest: TMenuItem
       Caption = #1057#1086#1079#1076#1072#1090#1100' '#1079#1072#1087#1088#1086#1089
       OnClick = miCreateRequestClick
+    end
+    object miSendRequest: TMenuItem
+      Caption = #1054#1090#1087#1088#1072#1074#1080#1090#1100' '#1079#1072#1087#1088#1086#1089
+      OnClick = miSendRequestClick
+    end
+    object N1: TMenuItem
+      Caption = '-'
+    end
+    object miDeleteRequest: TMenuItem
+      Caption = #1059#1076#1072#1083#1080#1090#1100' '#1079#1072#1087#1088#1086#1089
+      OnClick = miDeleteRequestClick
     end
   end
   object SynXMLSyn1: TSynXMLSyn

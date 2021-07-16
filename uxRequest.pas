@@ -20,7 +20,9 @@ type
         constructor Create(id: integer; templateId: integer; queryId: integer; xmlText: AnsiString; comment: AnsiString; date: AnsiString; status: AnsiString);
         procedure LoadReplies;
         procedure AddReply(R: OleVariant);
-        procedure UploadAndSendRequest;
+        procedure DeleteFromBase;
+        procedure UploadToBase;
+        procedure SendToEgais;
     end;
 
 implementation
@@ -48,21 +50,24 @@ var
 	R:  OleVariant;
     K:	integer;
 begin
-	try
+    try
         MainForm.RepliesTree.BeginUpdate;
         MainForm.RepliesTree.Clear;
         SetLength(Self.Replies, 0);
 
-        R := fcon.Execute('select id, queryid, data, received from Egais..Reply where queryid = ' + IntToStr(Self.queryId));
-        K := 0;
-        while not R.EOF do
+        if Self.queryId <> 0 then
         begin
-        	Self.AddReply(R);
+            R := fcon.Execute('select id, queryid, data, received from Egais..Reply where queryid = ' + IntToStr(Self.queryId));
+            K := 0;
+            while not R.EOF do
+            begin
+                Self.AddReply(R);
 
-            MainForm.RepliesTree.AddChild(nil, pointer(K));
+                MainForm.RepliesTree.AddChild(nil, pointer(K));
 
-            Inc(K);
-            R.MoveNext;
+                Inc(K);
+                R.MoveNext;
+            end;
         end;
     finally
         MainForm.RepliesTree.EndUpdate;
@@ -76,20 +81,21 @@ begin
     Self.Replies[High(Self.Replies)] := TReply.Create(AsInt(R, 'id'), AsInt(R, 'queryid'), AsStr(R, 'data'), AsStr(R, 'received'));
 end;
 
-procedure TRequest.UploadAndSendRequest;
-var
-    R:  OleVariant;
+procedure TRequest.UploadToBase;
 begin
-    R := fcon.Execute('insert into RequestsGenerator..Requests values(' +
+    fcon.Execute('insert into RequestsGenerator..Requests values(' +
     	Self.templateId.ToString + ', ' +
         'null, ' +
         QuotedStr(Self.xmlText) + ', ' +
         QuotedStr(Self.comment) + ', ' +
         'convert(char(23), getdate(), 126), ' +
         QuotedStr(Self.status) + ') select @@IDENTITY');
+end;
 
-    Self.id := AsInt(R, 0);
-
+procedure TRequest.SendToEgais;
+var
+	R:  OleVariant;
+begin
     R := fcon.Execute('execute Egais..QueryAdd ' +
     	QuotedStr(Templates.Items[MainForm.TemplatesTree.FocusedNode.Index].fsrarId) + ', ' +
         QuotedStr(Self.xmlText) + ', ' +
@@ -104,6 +110,11 @@ begin
         QuotedStr(Self.status) +
         ' where id = ' +
         Self.id.ToString);
+end;
+
+procedure TRequest.DeleteFromBase;
+begin
+    fcon.Execute('delete from RequestsGenerator..Requests where id = ' + Self.id.ToString);
 end;
 
 end.

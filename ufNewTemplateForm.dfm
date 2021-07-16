@@ -2,8 +2,8 @@ object NewTemplateForm: TNewTemplateForm
   Left = 0
   Top = 0
   Caption = #1057#1086#1079#1076#1072#1085#1080#1077' '#1085#1086#1074#1086#1075#1086' '#1090#1080#1087#1072' '#1079#1072#1087#1088#1086#1089#1072
-  ClientHeight = 448
-  ClientWidth = 377
+  ClientHeight = 259
+  ClientWidth = 499
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -13,13 +13,14 @@ object NewTemplateForm: TNewTemplateForm
   OldCreateOrder = False
   Position = poMainFormCenter
   Scaled = False
+  OnCreate = FormCreate
   PixelsPerInch = 96
   TextHeight = 16
   object GridPanel1: TGridPanel
     Left = 0
     Top = 0
-    Width = 377
-    Height = 448
+    Width = 499
+    Height = 259
     Align = alClient
     BevelOuter = bvNone
     ColumnCollection = <
@@ -44,44 +45,42 @@ object NewTemplateForm: TNewTemplateForm
       end>
     RowCollection = <
       item
-        Value = 92.000000000000000000
+        Value = 85.000000000000000000
       end
       item
-        Value = 8.000000000000000000
-      end
-      item
-        SizeStyle = ssAuto
-      end
-      item
-        SizeStyle = ssAuto
+        Value = 15.000000000000000000
       end>
     TabOrder = 0
+    ExplicitWidth = 377
+    ExplicitHeight = 448
     DesignSize = (
-      377
-      448)
+      499
+      259)
     object btCreateTemplate: TButton
       Left = 0
-      Top = 412
-      Width = 377
-      Height = 36
+      Top = 220
+      Width = 499
+      Height = 39
       Align = alClient
       Caption = #1057#1086#1093#1088#1072#1085#1080#1090#1100
       TabOrder = 0
       OnClick = btCreateTemplateClick
+      ExplicitTop = 226
+      ExplicitWidth = 598
     end
     object GridPanel2: TGridPanel
       Left = 0
-      Top = 86
-      Width = 313
-      Height = 239
-      Anchors = [akLeft]
+      Top = 0
+      Width = 499
+      Height = 220
+      Align = alClient
       BevelOuter = bvNone
       ColumnCollection = <
         item
-          Value = 50.000000000000000000
+          Value = 30.000000000000000000
         end
         item
-          Value = 50.000000000000010000
+          Value = 70.000000000000000000
         end>
       ControlCollection = <
         item
@@ -105,11 +104,6 @@ object NewTemplateForm: TNewTemplateForm
           Row = 2
         end
         item
-          Column = 1
-          Control = edRequestType
-          Row = 2
-        end
-        item
           Column = 0
           Control = Label4
           Row = 3
@@ -123,6 +117,11 @@ object NewTemplateForm: TNewTemplateForm
           Column = 1
           Control = cbFsrarID
           Row = 1
+        end
+        item
+          Column = 1
+          Control = cbTypes
+          Row = 2
         end>
       RowCollection = <
         item
@@ -138,12 +137,13 @@ object NewTemplateForm: TNewTemplateForm
           Value = 24.982042744743470000
         end>
       TabOrder = 1
+      ExplicitTop = -6
       DesignSize = (
-        313
-        239)
+        499
+        220)
       object Label1: TLabel
-        Left = 77
-        Top = 22
+        Left = 71
+        Top = 19
         Width = 79
         Height = 16
         Anchors = [akRight]
@@ -152,17 +152,17 @@ object NewTemplateForm: TNewTemplateForm
         ExplicitTop = 18
       end
       object edRequestName: TEdit
-        Left = 176
-        Top = 18
-        Width = 137
+        Left = 172
+        Top = 15
+        Width = 305
         Height = 24
-        Anchors = [akRight]
+        Anchors = []
         TabOrder = 0
-        ExplicitTop = 19
+        ExplicitLeft = 171
       end
       object Label2: TLabel
-        Left = 95
-        Top = 82
+        Left = 89
+        Top = 74
         Width = 61
         Height = 16
         Anchors = [akRight]
@@ -171,26 +171,18 @@ object NewTemplateForm: TNewTemplateForm
         ExplicitTop = 68
       end
       object Label3: TLabel
-        Left = 78
-        Top = 141
+        Left = 72
+        Top = 129
         Width = 78
         Height = 16
         Anchors = [akRight]
         Caption = #1058#1080#1087' '#1079#1072#1087#1088#1086#1089#1072':'
-        ExplicitLeft = 67
-        ExplicitTop = 118
-      end
-      object edRequestType: TEdit
-        Left = 176
-        Top = 137
-        Width = 137
-        Height = 24
-        Anchors = [akRight]
-        TabOrder = 1
+        ExplicitLeft = 0
+        ExplicitTop = 113
       end
       object Label4: TLabel
-        Left = 78
-        Top = 201
+        Left = 72
+        Top = 184
         Width = 78
         Height = 16
         Anchors = [akRight]
@@ -199,32 +191,44 @@ object NewTemplateForm: TNewTemplateForm
         ExplicitTop = 168
       end
       object btOpenXML: TButton
-        Left = 176
-        Top = 196
-        Width = 137
+        Left = 172
+        Top = 180
+        Width = 305
         Height = 25
-        Anchors = [akRight]
+        Anchors = []
         Caption = #1054#1073#1079#1086#1088
-        TabOrder = 2
+        TabOrder = 1
         OnClick = btOpenXMLClick
       end
       object cbFsrarID: TComboBox
-        Left = 176
-        Top = 78
-        Width = 137
+        Left = 172
+        Top = 70
+        Width = 305
         Height = 24
-        Anchors = [akRight]
-        TabOrder = 3
+        Style = csDropDownList
+        Anchors = []
+        ItemIndex = 0
+        TabOrder = 2
+        Text = '010060693049'
         Items.Strings = (
           '010060693049'
-          '020000559704'
-          '020000783752')
-        ExplicitTop = 79
+          '020000559704')
+        ExplicitLeft = 171
+      end
+      object cbTypes: TComboBox
+        Left = 172
+        Top = 125
+        Width = 305
+        Height = 24
+        Style = csDropDownList
+        Anchors = []
+        TabOrder = 3
+        ExplicitLeft = 171
       end
     end
     object Memo1: TMemo
-      Left = 8
-      Top = 9
+      Left = 0
+      Top = 0
       Width = 57
       Height = 48
       Anchors = []
@@ -241,7 +245,7 @@ object NewTemplateForm: TNewTemplateForm
   object OpenDialog1: TOpenDialog
     DefaultExt = '.xml'
     Filter = 'XML '#1092#1072#1081#1083#1099'|*.xml'
-    Left = 176
-    Top = 344
+    Left = 16
+    Top = 72
   end
 end

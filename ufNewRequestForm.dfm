@@ -2,8 +2,8 @@ object NewRequestForm: TNewRequestForm
   Left = 0
   Top = 0
   Caption = #1057#1086#1079#1076#1072#1085#1080#1077' '#1085#1086#1074#1086#1075#1086' '#1079#1072#1087#1088#1086#1089#1072
-  ClientHeight = 510
-  ClientWidth = 539
+  ClientHeight = 196
+  ClientWidth = 346
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -18,8 +18,8 @@ object NewRequestForm: TNewRequestForm
   object GridPanel1: TGridPanel
     Left = 0
     Top = 0
-    Width = 539
-    Height = 510
+    Width = 346
+    Height = 196
     Align = alClient
     ColumnCollection = <
       item
@@ -33,33 +33,30 @@ object NewRequestForm: TNewRequestForm
       end
       item
         Column = 0
-        Control = btSaveAndSend
+        Control = btSave
         Row = 1
       end>
     RowCollection = <
       item
-        Value = 92.000000000000000000
+        Value = 85.000000000000000000
       end
       item
-        Value = 8.000000000000000000
+        Value = 15.000000000000000000
       end>
     TabOrder = 0
-    DesignSize = (
-      539
-      510)
     object GridPanel2: TGridPanel
-      Left = 93
-      Top = 102
-      Width = 352
-      Height = 264
-      Anchors = []
+      Left = 1
+      Top = 1
+      Width = 344
+      Height = 165
+      Align = alClient
       BevelOuter = bvNone
       ColumnCollection = <
         item
-          Value = 50.000000000000000000
+          Value = 30.000000000000000000
         end
         item
-          Value = 50.000000000000000000
+          Value = 70.000000000000000000
         end>
       ControlCollection = <
         item
@@ -94,24 +91,21 @@ object NewRequestForm: TNewRequestForm
         end>
       RowCollection = <
         item
-          Value = 25.000000000000000000
+          Value = 33.333333333333340000
         end
         item
-          Value = 25.000000000000000000
+          Value = 33.333333333333340000
         end
         item
-          Value = 25.000000000000000000
-        end
-        item
-          Value = 25.000000000000000000
+          Value = 33.333333333333310000
         end>
       TabOrder = 0
       DesignSize = (
-        352
-        264)
+        344
+        165)
       object Label1: TLabel
-        Left = 115
-        Top = 91
+        Left = 42
+        Top = 74
         Width = 61
         Height = 16
         Anchors = [akRight]
@@ -120,20 +114,22 @@ object NewRequestForm: TNewRequestForm
         ExplicitTop = 96
       end
       object cbFsrarID: TComboBox
-        Left = 207
-        Top = 87
-        Width = 145
+        Left = 134
+        Top = 70
+        Width = 178
         Height = 24
-        Anchors = [akRight]
+        Style = csDropDownList
+        Anchors = []
+        ItemIndex = 0
         TabOrder = 0
+        Text = '010060693049'
         Items.Strings = (
           '010060693049'
-          '020000559704'
-          '020000783752')
+          '020000559704')
       end
       object Label2: TLabel
-        Left = 102
-        Top = 25
+        Left = 29
+        Top = 19
         Width = 74
         Height = 16
         Anchors = [akRight]
@@ -142,18 +138,18 @@ object NewRequestForm: TNewRequestForm
         ExplicitTop = 32
       end
       object btEditXML: TButton
-        Left = 207
-        Top = 20
-        Width = 145
+        Left = 134
+        Top = 15
+        Width = 178
         Height = 25
-        Anchors = [akRight]
+        Anchors = []
         Caption = #1056#1077#1076#1072#1082#1090#1080#1088#1086#1074#1072#1090#1100
         TabOrder = 1
         OnClick = btEditXMLClick
       end
       object Label3: TLabel
-        Left = 99
-        Top = 157
+        Left = 26
+        Top = 129
         Width = 77
         Height = 16
         Anchors = [akRight]
@@ -162,23 +158,23 @@ object NewRequestForm: TNewRequestForm
         ExplicitTop = 145
       end
       object edComment: TEdit
-        Left = 207
-        Top = 153
-        Width = 145
+        Left = 134
+        Top = 125
+        Width = 178
         Height = 24
-        Anchors = [akRight]
+        Anchors = []
         TabOrder = 2
       end
     end
-    object btSaveAndSend: TButton
+    object btSave: TButton
       Left = 1
-      Top = 468
-      Width = 537
-      Height = 41
+      Top = 166
+      Width = 344
+      Height = 29
       Align = alClient
-      Caption = #1057#1086#1093#1088#1072#1085#1080#1090#1100' '#1080' '#1086#1090#1087#1088#1072#1074#1080#1090#1100
+      Caption = #1057#1086#1093#1088#1072#1085#1080#1090#1100' '#1079#1072#1087#1088#1086#1089
       TabOrder = 1
-      OnClick = btSaveAndSendClick
+      OnClick = btSaveClick
     end
   end
 end
